@@ -27,9 +27,11 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      # Install pnpm globally
       - name: Install pnpm
         run: npm install -g pnpm
 
+      # Ensure the lock file exists
       - name: Ensure lock file exists
         run: |
           if [ ! -f "pnpm-lock.yaml" ]; then
@@ -37,6 +39,7 @@ jobs:
             exit 1
           fi
 
+      # Restore cache for pnpm
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -47,12 +50,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
+      # Install dependencies using pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Build the project using pnpm
       - name: Build with Next.js
         run: pnpm next build
 
+      # Upload build artifacts for deployment
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
