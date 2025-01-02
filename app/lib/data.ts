@@ -17,10 +17,10 @@ export async function fetchRevenue() {
 
   try {
     // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
+    // Don't do this in production :) whatever that means
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // Execute the query using the client
     const data = await client.sql<Revenue>`SELECT * FROM revenue`;
@@ -28,7 +28,7 @@ export async function fetchRevenue() {
     //const data = await sql<Revenue>`SELECT * FROM revenue`;
 
     // Log or process the result if needed
-    console.log('Fetched Revenue Data');
+    console.log('Data fetch completed.');
 
     // Return the rows from the query result
     return data.rows;
@@ -44,6 +44,9 @@ export async function fetchLatestInvoices() {
   const client = await db.connect(); // Explicitly create a database client
 
   try {
+
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     // Execute the query using the client
     const data = await client.sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
