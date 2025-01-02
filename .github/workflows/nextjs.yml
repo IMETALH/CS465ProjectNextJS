@@ -54,6 +54,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Set environment variables
+      - name: Set environment variables
+        run: echo "POSTGRES_URL=${{ secrets.POSTGRES_URL }}" >> $GITHUB_ENV
+
       # Build the project using pnpm
       - name: Build with Next.js
         run: pnpm next build
