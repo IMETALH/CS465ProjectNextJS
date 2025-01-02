@@ -28,11 +28,9 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      # Install pnpm globally
+      # Ensure pnpm is installed
       - name: Install pnpm
-        run: |
-          npm install -g pnpm
-          pnpm --version # Check pnpm is installed correctly
+        run: npm install -g pnpm
 
       # Ensure the lock file exists
       - name: Ensure lock file exists
@@ -65,7 +63,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: .next
 
   deploy:
     environment:
